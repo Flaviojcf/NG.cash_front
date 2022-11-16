@@ -29,9 +29,6 @@ const FormValidationSchema = zod
   .refine((data) => data.password === data.confirmPassword, {
     message: "Senhas são diferentes.",
     path: ["confirmPassword"],
-  }).refine((data) => data.confirmPassword === data.password, {
-    message: "Senhas são diferentes.",
-    path: ["password"],
   });
 
 type NewUserFormData = zod.infer<typeof FormValidationSchema>;
@@ -50,6 +47,7 @@ export function Register() {
 
   function handleCreateNewUser(data: NewUserFormData) {
     console.log(data);
+    reset();
   }
 
   return (
@@ -93,7 +91,9 @@ export function Register() {
                 type="password"
                 placeholder="Confirme sua senha"
                 {...register("confirmPassword")}
-                className={errors.confirmPassword?.message !== undefined ? "Red" : ""}
+                className={
+                  errors.confirmPassword?.message !== undefined ? "Red" : ""
+                }
               />
             </InputContainer>
 
