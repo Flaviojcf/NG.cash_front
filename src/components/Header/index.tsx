@@ -1,5 +1,5 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { List } from "phosphor-react";
+import { ArrowRight, List } from "phosphor-react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Container,
@@ -53,13 +53,16 @@ export function Header() {
 
             <ul>
               <li>
+                <ArrowRight size={18} display={pathname === '/' ? 'flex' : 'none'}/>
                 <Link to="/">HOME</Link>
               </li>
 
               <li>
+                <ArrowRight size={18} display={pathname === '/Login' ? 'flex' : 'none'}/>
                 <Link to="/Login">LOGIN</Link>
               </li>
               <li>
+                <ArrowRight size={18} display={pathname === '/Register' ? 'flex' : 'none'}/>
                 <Link to="/Register">REGISTER</Link>
               </li>
             </ul>

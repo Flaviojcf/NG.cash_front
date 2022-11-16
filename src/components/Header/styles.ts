@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
-export const Container = styled.div`
+export const Container = styled.header`
   display: flex;
   position: fixed;
 
@@ -11,6 +11,10 @@ export const Container = styled.div`
   background: ${(props) => props.theme.colors.black};
 
   padding: 1.5rem;
+
+  z-index: 999px;
+
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5);
 `;
 
 export const LinkContainer = styled.ul`
@@ -43,7 +47,7 @@ export const LinkToPagesContainer = styled.div`
 
   > li > a {
     color: ${(props) => props.theme.colors.white};
-    transition: 0.2s;
+    transition: all 0.2s;
 
     &:hover {
       opacity: 0.5;
@@ -51,7 +55,7 @@ export const LinkToPagesContainer = styled.div`
   }
 
   .LinkBorderBottomColor {
-    border-bottom: 4px solid ${(props)=>props.theme.colors.green};
+    border-bottom: 4px solid ${(props) => props.theme.colors.green};
   }
 
   @media screen and (max-width: 1024px) {
@@ -84,10 +88,9 @@ export const DropdownMenuContent = styled(DropdownMenu.Content)`
   margin-right: 1.5rem;
   margin-top: 2.5rem;
 
-
   background: ${(props) => props.theme.colors.white};
   border-radius: 8px;
-  box-shadow: 6px -1px 29px 0px rgba(0,0,0,0.75);
+  box-shadow: 6px -1px 29px 0px rgba(0, 0, 0, 0.75);
 
   > a:first-child {
     cursor: pointer;
@@ -106,7 +109,13 @@ export const DropdownMenuContent = styled(DropdownMenu.Content)`
     gap: 1.5rem;
     padding: 1.5rem 1rem;
 
-    > li > a{
+    > li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    > li > a {
       color: ${(props) => props.theme.colors.black};
       transition: 0.2s;
 
