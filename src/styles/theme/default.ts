@@ -1,4 +1,5 @@
 export const defaultTheme = {
+  //Cores extraídas da página da NG.cash
   colors: {
     black: "#000000",
     "purple-100": "#7D2CFF",
