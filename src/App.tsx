@@ -8,15 +8,17 @@ import { defaultTheme } from "./styles/theme/default";
 
 function App() {
   return (
-    <AuthContextProvider>
-      <ThemeProvider theme={defaultTheme}>
-        <BrowserRouter>
+    
+    <BrowserRouter>
+      <AuthContextProvider>
+        <ThemeProvider theme={defaultTheme}>
           <Router />
           <GlobalStyle />
-        </BrowserRouter>
-        <GlobalStyle />
-      </ThemeProvider>
-    </AuthContextProvider>
+
+          <GlobalStyle />
+        </ThemeProvider>
+      </AuthContextProvider>
+    </BrowserRouter>
   );
 }
 
