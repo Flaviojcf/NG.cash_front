@@ -1,6 +1,8 @@
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Container,
   ImageContainer,
@@ -12,6 +14,7 @@ import {
   TitleRegisterFormContainer,
 } from "./styles";
 import { Link } from "react-router-dom";
+import { api } from "../../service/api";
 
 const FormValidationSchema = zod
   .object({
@@ -45,13 +48,34 @@ export function Register() {
     formState: { errors },
   } = newUserDataForm;
 
-  function handleCreateNewUser(data: NewUserFormData) {
-    console.log(data);
-    reset();
+  async function handleCreateNewUser(data: NewUserFormData) {
+    try {
+      await api.post("/createUserAccount", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        username: data.username,
+        password: data.password,
+      });
+      toast.success("Conta cadastrada!", {
+        position: "top-center",
+        autoClose: 1000,
+        theme: "dark",
+      });
+      reset();
+    } catch (err:any) {
+      toast.error("Username já cadastrado!", {
+        position: "top-center",
+        autoClose: 1000,
+        theme: "dark",
+      });
+     
+    }
   }
 
   return (
     <Container>
+      <ToastContainer />
       <ImageContainer>
         <img src="cover_desktop.371772f30ede5f9afee74ba78de1a623.svg" alt="" />
       </ImageContainer>
