@@ -25,11 +25,11 @@ export function Header() {
 
         <LinkToPagesContainer>
           <li>
-            <Link to="/" className={pathname === '/' ? "LinkBorderBottomColor" : ''}>HOME</Link>
+            <Link to="/Home" className={pathname === '/Home' ? "LinkBorderBottomColor" : ''}>HOME</Link>
           </li>
 
           <li>
-            <Link to="/Login" className={pathname === '/Login' ? "LinkBorderBottomColor" : ''}>LOGIN</Link>
+            <Link to="/" className={pathname === '/' ? "LinkBorderBottomColor" : ''}>LOGIN</Link>
           </li>
           <li>
             <Link to="/Register" className={pathname === '/Register' ? "LinkBorderBottomColor" : ''}>REGISTER</Link>
@@ -53,13 +53,13 @@ export function Header() {
 
             <ul>
               <li>
-                <ArrowRight size={18} display={pathname === '/' ? 'flex' : 'none'}/>
-                <Link to="/">HOME</Link>
+                <ArrowRight size={18} display={pathname === '/Home' ? 'flex' : 'none'}/>
+                <Link to="/Home">HOME</Link>
               </li>
 
               <li>
-                <ArrowRight size={18} display={pathname === '/Login' ? 'flex' : 'none'}/>
-                <Link to="/Login">LOGIN</Link>
+                <ArrowRight size={18} display={pathname === '/' ? 'flex' : 'none'}/>
+                <Link to="/">LOGIN</Link>
               </li>
               <li>
                 <ArrowRight size={18} display={pathname === '/Register' ? 'flex' : 'none'}/>

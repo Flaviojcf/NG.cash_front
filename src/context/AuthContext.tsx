@@ -23,6 +23,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+      setIsAuthenticated(true)
     }
   });
 
@@ -35,7 +36,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         username,
         password,
       });
-      const token = response.data.token;
+ 
+      const token = response.data;
       localStorage.setItem("token", JSON.stringify(token));
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setIsAuthenticated(true);

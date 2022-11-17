@@ -13,8 +13,9 @@ import {
   RegisterFormContainer,
   TitleRegisterFormContainer,
 } from "./styles";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { api } from "../../service/api";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const FormValidationSchema = zod
   .object({
@@ -37,6 +38,10 @@ const FormValidationSchema = zod
 type NewUserFormData = zod.infer<typeof FormValidationSchema>;
 
 export function Register() {
+  const {isAuthenticated} = useAuthContext()
+
+  const navigate = useNavigate()
+
   const newUserDataForm = useForm<NewUserFormData>({
     resolver: zodResolver(FormValidationSchema),
   });
@@ -74,6 +79,8 @@ export function Register() {
   }
 
   return (
+    <>
+    {!isAuthenticated ?(
     <Container>
       <ToastContainer />
       <ImageContainer>
@@ -128,7 +135,7 @@ export function Register() {
 
           <p>
             Já possui conta?{" "}
-            <Link to="/Login">
+            <Link to="/">
               <strong>Faça login!</strong>
             </Link>
           </p>
@@ -139,5 +146,8 @@ export function Register() {
         </RegisterFormContainer>
       </RegisterContainer>
     </Container>
+    ) : navigate('/Home')
+    }
+    </>
   );
 }
