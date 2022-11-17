@@ -31,7 +31,7 @@ export const ImageContainer = styled.div`
 
   @media screen and (max-width: 1024px) {
     margin-top: 4rem;
-    width: 100vw;
+    width: 100%;
   }
 `;
 
@@ -47,7 +47,7 @@ export const RegisterContainer = styled.div`
   background: ${(props) => props.theme.colors["purple-200"]};
 
   @media screen and (max-width: 1024px) {
-    width: 100vw;
+    width: 100%;
   }
 `;
 
