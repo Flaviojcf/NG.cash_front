@@ -15,6 +15,8 @@ import {
 } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useEffect, useState } from "react";
+import { Eye, EyeClosed } from "phosphor-react";
 
 const FormValidationSchema = zod.object({
   username: zod.string(),
@@ -25,10 +27,11 @@ type NewUserFormData = zod.infer<typeof FormValidationSchema>;
 
 export function Login() {
   const { onSubmitLogin, isAuthenticated } = useAuthContext();
+  const [isShowPassowrd, SetIsShowPassword] = useState(false);
 
-  console.log(isAuthenticated)
+  console.log(isAuthenticated);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const newUserDataForm = useForm<NewUserFormData>({
     resolver: zodResolver(FormValidationSchema),
@@ -60,6 +63,9 @@ export function Login() {
   const isButtonDisabled =
     watch("password") === undefined || watch("username") === undefined;
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -92,13 +98,15 @@ export function Login() {
                 <InputContainer>
                   <label htmlFor="password">{errors.password?.message}</label>
                   <input
-                    type="password"
+                    type={isShowPassowrd === false ? 'password' : 'text'}
                     placeholder="Digite sua senha"
                     {...register("password")}
                     className={
                       errors.password?.message !== undefined ? "Red" : ""
                     }
                   />
+                  <EyeClosed onClick={()=>SetIsShowPassword(!isShowPassowrd)} size={32} className={isShowPassowrd === false ? 'IconActive' : 'IconDisabled'}/>
+                  <Eye onClick={()=>SetIsShowPassword(!isShowPassowrd)} size={32}  className={isShowPassowrd === true ? 'IconActive' : 'IconDisabled'}/>
                 </InputContainer>
 
                 <button type="submit" disabled={isButtonDisabled}>
@@ -123,7 +131,7 @@ export function Login() {
           </LoginContainer>
         </Container>
       ) : (
-        navigate('/Home')
+        navigate("/Home")
       )}
     </>
   );
