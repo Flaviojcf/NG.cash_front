@@ -97,6 +97,7 @@ export const LoginFormContainer = styled.form`
 
 export const TitleRegisterFormContainer = styled.div`
   display: flex;
+  text-align: center;
   justify-content: center;
   padding: 2rem;
 
