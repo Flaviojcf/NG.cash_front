@@ -13,7 +13,7 @@ import {
   LoginFormContainer,
   TitleRegisterFormContainer,
 } from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const FormValidationSchema = zod.object({
@@ -24,7 +24,11 @@ const FormValidationSchema = zod.object({
 type NewUserFormData = zod.infer<typeof FormValidationSchema>;
 
 export function Login() {
-  const { onSubmitLogin } = useAuthContext();
+  const { onSubmitLogin, isAuthenticated } = useAuthContext();
+
+  console.log(isAuthenticated)
+
+  const navigate = useNavigate()
 
   const newUserDataForm = useForm<NewUserFormData>({
     resolver: zodResolver(FormValidationSchema),
@@ -39,12 +43,11 @@ export function Login() {
   } = newUserDataForm;
 
   async function handleLogin(data: NewUserFormData) {
-    if(data.password === '' || data.username === '') {
-        return
+    if (data.password === "" || data.username === "") {
+      return;
     }
     try {
       await onSubmitLogin(data.username, data.password);
-
     } catch (err: any) {
       toast.error("Usuário ou senha incorretos.", {
         position: "top-center",
@@ -54,62 +57,74 @@ export function Login() {
     }
   }
 
-  const isButtonDisabled = watch('password') === undefined || watch('username') === undefined 
-
-  console.log(isButtonDisabled)
+  const isButtonDisabled =
+    watch("password") === undefined || watch("username") === undefined;
 
 
   return (
-    <Container>
-      <ToastContainer />
-      <ImageContainer>
-        <img src="ngcard.ced5acb.svg" />
-      </ImageContainer>
+    <>
+      {!isAuthenticated ? (
+        <Container>
+          <ToastContainer />
+          <ImageContainer>
+            <img src="ngcard.ced5acb.svg" />
+          </ImageContainer>
 
-      <LoginContainer>
-        <LoginFormContainer onSubmit={handleSubmit(handleLogin)}>
-          <TitleRegisterFormContainer>
-            <p>LOGIN</p>
-          </TitleRegisterFormContainer>
+          <LoginContainer>
+            <LoginFormContainer onSubmit={handleSubmit(handleLogin)}>
+              <TitleRegisterFormContainer>
+                <p>LOGIN</p>
+              </TitleRegisterFormContainer>
 
-          <InputAndButtonContainer>
-            <InputContainer>
-              <label htmlFor="username">{errors.username?.message}</label>
-              <input
-                type="text"
-                placeholder="Digite seu username"
-                {...register("username")}
-                className={errors.username?.message !== undefined ? "Red" : ""}
-              />
-            </InputContainer>
+              <InputAndButtonContainer>
+                <InputContainer>
+                  <label htmlFor="username">{errors.username?.message}</label>
+                  <input
+                    type="text"
+                    placeholder="Digite seu username"
+                    {...register("username")}
+                    className={
+                      errors.username?.message !== undefined ? "Red" : ""
+                    }
+                  />
+                </InputContainer>
 
-            <InputContainer>
-              <label htmlFor="password">{errors.password?.message}</label>
-              <input
-                type="password"
-                placeholder="Digite sua senha"
-                {...register("password")}
-                className={errors.password?.message !== undefined ? "Red" : ""}
-              />
-            </InputContainer>
+                <InputContainer>
+                  <label htmlFor="password">{errors.password?.message}</label>
+                  <input
+                    type="password"
+                    placeholder="Digite sua senha"
+                    {...register("password")}
+                    className={
+                      errors.password?.message !== undefined ? "Red" : ""
+                    }
+                  />
+                </InputContainer>
 
-            <button type="submit" disabled={isButtonDisabled}>
-              <strong>ENTRAR</strong>
-            </button>
-          </InputAndButtonContainer>
+                <button type="submit" disabled={isButtonDisabled}>
+                  <strong>ENTRAR</strong>
+                </button>
+              </InputAndButtonContainer>
 
-          <p>
-            Não possui conta?{" "}
-            <Link to="/Register">
-              <strong>Cadastre-se!</strong>
-            </Link>
-          </p>
+              <p>
+                Não possui conta?{" "}
+                <Link to="/Register">
+                  <strong>Cadastre-se!</strong>
+                </Link>
+              </p>
 
-          <ImageFormContainer>
-            <img src="second_cover_desktop.3673a8137e5757dc195852d552b438a7.svg" alt="" />
-          </ImageFormContainer>
-        </LoginFormContainer>
-      </LoginContainer>
-    </Container>
+              <ImageFormContainer>
+                <img
+                  src="second_cover_desktop.3673a8137e5757dc195852d552b438a7.svg"
+                  alt=""
+                />
+              </ImageFormContainer>
+            </LoginFormContainer>
+          </LoginContainer>
+        </Container>
+      ) : (
+        navigate('/Home')
+      )}
+    </>
   );
 }

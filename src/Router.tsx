@@ -8,9 +8,9 @@ export function Router() {
   return (
     <Routes>
       <Route element={<DefaultLayout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
         <Route path="/Register" element={<Register />} />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/Home" element={<Home />} />
       </Route>
     </Routes>
   );
