@@ -35,7 +35,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         username,
         password,
       });
-      const token = response.data.token;
+      console.log(response)
+      const token = response.data;
       localStorage.setItem("token", JSON.stringify(token));
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setIsAuthenticated(true);
