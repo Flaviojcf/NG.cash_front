@@ -34,6 +34,9 @@ export function Header() {
           <li>
             <Link to="/Register" className={pathname === '/Register' ? "LinkBorderBottomColor" : ''}>REGISTER</Link>
           </li>
+          <li>
+            <Link to="/User" className={pathname === '/User' ? "LinkBorderBottomColor" : ''}>USER</Link>
+          </li>
         </LinkToPagesContainer>
 
         <DropdownMenu.Root>
