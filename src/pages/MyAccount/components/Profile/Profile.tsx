@@ -12,12 +12,40 @@ import {
   ValueContainer,
 } from "./styles";
 
-export function Profile() {
+interface ProfileProps {
+  handleClick: Function;
+  selecteComponent: string;
+}
+
+export function Profile({ handleClick, selecteComponent }: ProfileProps) {
   const { username, balance } = useAuthContext();
   const [show, setShow] = useState<boolean>(true);
-  const [selectedOption, setselectedOption] = useState("Extrato");
-  console.log(selectedOption)
+  const [selectedOption, setselectedOption] = useState("Extract");
   const [open, setOpen] = useState(false);
+
+  function getName(name: string) {
+    if (name === "Extract") {
+      setselectedOption("Extract");
+      handleClick(name);
+    } else if (name === "New transaction") {
+      setselectedOption("New transaction");
+    } else if (name === "Cards") {
+      setselectedOption("Cards");
+      handleClick(name);
+    }
+  }
+
+  const isExtract =
+    open === false &&
+    selectedOption === "New transaction" &&
+    selecteComponent === "Extract";
+  const isCards =
+    open === false &&
+    selectedOption === "New transaction" &&
+    selecteComponent === "Cards";
+
+  console.log(isCards);
+
   return (
     <ContainerProfile>
       <ProfileContainer>
@@ -48,18 +76,18 @@ export function Profile() {
       <MenuContainer>
         <ul>
           <li
-            onClick={() => setselectedOption("Extrato")}
-            className={selectedOption === "Extrato" || open === false && selectedOption === "Nova Transação"? "LiSelected" : ""}
+            onClick={() => getName("Extract")}
+            className={
+              selectedOption === "Extract" || isExtract ? "LiSelected" : ""
+            }
           >
             Extrato
           </li>
-          <Dialog.Root open={open} onOpenChange={()=>setOpen(!open)}>
+          <Dialog.Root open={open} onOpenChange={() => setOpen(!open)}>
             <Dialog.Trigger asChild>
               <li
-                onClick={() => setselectedOption("Nova Transação")}
-                className={
-                    open ? "LiSelected" : ""
-                }
+                onClick={() => getName("New transaction")}
+                className={open === true ? "LiSelected" : ""}
               >
                 Nova Transação
               </li>
@@ -67,8 +95,10 @@ export function Profile() {
             <NewTransaction />
           </Dialog.Root>
           <li
-            onClick={() => setselectedOption("Cartões")}
-            className={selectedOption === "Cartões" ? "LiSelected" : ""}
+            onClick={() => getName("Cards")}
+            className={
+              selectedOption === "Cards" || isCards ? "LiSelected" : ""
+            }
           >
             Cartões
           </li>
