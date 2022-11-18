@@ -3,13 +3,14 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
 
-  height: 100vh;
+  height: 100%;
 
   padding-top: 2rem;
 
   @media screen and (max-width: 1024px) {
     flex-direction: column;
   }
+  
 `;
 
 export const ImageContainer = styled.div`
@@ -29,6 +30,7 @@ export const ImageContainer = styled.div`
 
   @media screen and (max-width: 1024px) {
     margin-top: 4rem;
+    height: 100%;
     width: 100%;
   }
 `;
@@ -150,6 +152,7 @@ export const InputContainer = styled.div`
     border: none;
     height: 2.5rem;
 
+
     padding: 0rem 1rem;
 
     &:focus {
@@ -157,6 +160,17 @@ export const InputContainer = styled.div`
       outline: none;
     }
   }
+  .IconActive {
+    margin-left: auto;
+    margin-right: 0.2rem;
+    cursor: pointer;
+    margin-top: -2.3rem;
+  }
+  .IconDisabled {
+    display: none;
+  }
+
+
 
   .Red {
     border: 1px solid red;

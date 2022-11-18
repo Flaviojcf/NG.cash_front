@@ -5,7 +5,7 @@ export const Container = styled.div`
 
   left: 0;
   bottom: 0;
-
+  
   height: 35rem;
   width: 100%;
   background: ${(props) => props.theme.colors.black};

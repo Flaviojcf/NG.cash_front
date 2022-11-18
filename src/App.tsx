@@ -8,7 +8,6 @@ import { defaultTheme } from "./styles/theme/default";
 
 function App() {
   return (
-    
     <BrowserRouter>
       <AuthContextProvider>
         <ThemeProvider theme={defaultTheme}>

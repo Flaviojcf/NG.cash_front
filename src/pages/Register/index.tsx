@@ -13,9 +13,10 @@ import {
   RegisterFormContainer,
   TitleRegisterFormContainer,
 } from "./styles";
-import { Link , useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../service/api";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useEffect } from "react";
 
 const FormValidationSchema = zod
   .object({
@@ -38,9 +39,9 @@ const FormValidationSchema = zod
 type NewUserFormData = zod.infer<typeof FormValidationSchema>;
 
 export function Register() {
-  const {isAuthenticated} = useAuthContext()
+  const { isAuthenticated } = useAuthContext();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const newUserDataForm = useForm<NewUserFormData>({
     resolver: zodResolver(FormValidationSchema),
@@ -68,86 +69,97 @@ export function Register() {
         theme: "dark",
       });
       reset();
-    } catch (err:any) {
+    } catch (err: any) {
       toast.error("Username já cadastrado!", {
         position: "top-center",
         autoClose: 1000,
         theme: "dark",
       });
-     
     }
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
-    {!isAuthenticated ?(
-    <Container>
-      <ToastContainer />
-      <ImageContainer>
-        <img src="cover_desktop.371772f30ede5f9afee74ba78de1a623.svg" alt="" />
-      </ImageContainer>
+      {!isAuthenticated ? (
+        <Container>
+          <ToastContainer />
+          <ImageContainer>
+            <img
+              src="cover_desktop.371772f30ede5f9afee74ba78de1a623.svg"
+              alt=""
+            />
+          </ImageContainer>
 
-      <RegisterContainer>
-        <RegisterFormContainer onSubmit={handleSubmit(handleCreateNewUser)}>
-          <TitleRegisterFormContainer>
-            <p>Cadastre-se agora!</p>
-          </TitleRegisterFormContainer>
+          <RegisterContainer>
+            <RegisterFormContainer onSubmit={handleSubmit(handleCreateNewUser)}>
+              <TitleRegisterFormContainer>
+                <p>Cadastre-se agora!</p>
+              </TitleRegisterFormContainer>
 
-          <InputAndButtonContainer>
-            <InputContainer>
-              <label htmlFor="username">{errors.username?.message}</label>
-              <input
-                type="text"
-                placeholder="Digite seu username"
-                {...register("username")}
-                className={errors.username?.message !== undefined ? "Red" : ""}
-              />
-            </InputContainer>
+              <InputAndButtonContainer>
+                <InputContainer>
+                  <label htmlFor="username">{errors.username?.message}</label>
+                  <input
+                    type="text"
+                    placeholder="Digite seu username"
+                    {...register("username")}
+                    className={
+                      errors.username?.message !== undefined ? "Red" : ""
+                    }
+                  />
+                </InputContainer>
 
-            <InputContainer>
-              <label htmlFor="password">{errors.password?.message}</label>
-              <input
-                type="password"
-                placeholder="Digite sua senha"
-                {...register("password")}
-                className={errors.password?.message !== undefined ? "Red" : ""}
-              />
-            </InputContainer>
+                <InputContainer>
+                  <label htmlFor="password">{errors.password?.message}</label>
+                  <input
+                    type="password"
+                    placeholder="Digite sua senha"
+                    {...register("password")}
+                    className={
+                      errors.password?.message !== undefined ? "Red" : ""
+                    }
+                  />
+                </InputContainer>
 
-            <InputContainer>
-              <label htmlFor="confirmPassword">
-                {errors.confirmPassword?.message}
-              </label>
-              <input
-                type="password"
-                placeholder="Confirme sua senha"
-                {...register("confirmPassword")}
-                className={
-                  errors.confirmPassword?.message !== undefined ? "Red" : ""
-                }
-              />
-            </InputContainer>
+                <InputContainer>
+                  <label htmlFor="confirmPassword">
+                    {errors.confirmPassword?.message}
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Confirme sua senha"
+                    {...register("confirmPassword")}
+                    className={
+                      errors.confirmPassword?.message !== undefined ? "Red" : ""
+                    }
+                  />
+                </InputContainer>
 
-            <button type="submit">
-              <strong>CADASTRAR</strong>
-            </button>
-          </InputAndButtonContainer>
+                <button type="submit">
+                  <strong>CADASTRAR</strong>
+                </button>
+              </InputAndButtonContainer>
 
-          <p>
-            Já possui conta?{" "}
-            <Link to="/">
-              <strong>Faça login!</strong>
-            </Link>
-          </p>
+              <p>
+                Já possui conta?{" "}
+                <Link to="/">
+                  <strong>Faça login!</strong>
+                </Link>
+              </p>
 
-          <ImageFormContainer>
-            <img src="footer.png" alt="" />
-          </ImageFormContainer>
-        </RegisterFormContainer>
-      </RegisterContainer>
-    </Container>
-    ) : navigate('/Home')
-    }
+              <ImageFormContainer>
+                <img src="footer.png" alt="" />
+              </ImageFormContainer>
+            </RegisterFormContainer>
+          </RegisterContainer>
+        </Container>
+      ) : (
+        navigate("/MyAccount")
+      )}
     </>
   );
 }
