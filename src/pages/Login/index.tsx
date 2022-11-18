@@ -131,7 +131,7 @@ export function Login() {
           </LoginContainer>
         </Container>
       ) : (
-        navigate("/Home")
+        navigate("/MyAccount")
       )}
     </>
   );

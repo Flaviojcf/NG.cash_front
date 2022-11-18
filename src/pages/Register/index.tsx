@@ -158,7 +158,7 @@ export function Register() {
           </RegisterContainer>
         </Container>
       ) : (
-        navigate("/Home")
+        navigate("/MyAccount")
       )}
     </>
   );

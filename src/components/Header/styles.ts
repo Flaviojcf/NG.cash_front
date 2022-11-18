@@ -45,12 +45,24 @@ export const LinkToPagesContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  > li > a {
+  .LiDisplayNone {
+    display: none;
+  }
+
+  > li {
+    cursor: pointer;
     color: ${(props) => props.theme.colors.white};
-    transition: all 0.2s;
 
     &:hover {
       opacity: 0.5;
+    }
+    > a {
+      color: ${(props) => props.theme.colors.white};
+      transition: all 0.2s;
+
+      &:hover {
+        opacity: 0.5;
+      }
     }
   }
 
@@ -110,6 +122,7 @@ export const DropdownMenuContent = styled(DropdownMenu.Content)`
     padding: 1.5rem 1rem;
 
     > li {
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -123,5 +136,8 @@ export const DropdownMenuContent = styled(DropdownMenu.Content)`
         opacity: 0.7;
       }
     }
+  }
+  .LiDisplayNone {
+    display: none;
   }
 `;
