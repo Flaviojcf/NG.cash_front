@@ -1,3 +1,4 @@
+import { useAuthContext } from "../../../../hooks/useAuthContext";
 import {
   CardDetailsContainer,
   CardNumberContainer,
@@ -7,9 +8,8 @@ import {
   NgContainer,
 } from "./styles";
 
-
-
 export function Cards() {
+  const { username } = useAuthContext();
   return (
     <Container>
       <Content>
@@ -24,7 +24,7 @@ export function Cards() {
           <CardNumberContainer>
             <p>Card Number</p>
             <p>1212 1212 1212 1212</p>
-            <p>Flávio Costa</p>
+            <p>{username}</p>
           </CardNumberContainer>
           <CardValidateContainer>
             <p>Valid Thru</p>
@@ -45,7 +45,7 @@ export function Cards() {
           <CardNumberContainer>
             <p>Card Number</p>
             <p>2121 2121 2121 2121</p>
-            <p>Flávio Costa</p>
+            <p>{username}</p>
           </CardNumberContainer>
           <CardValidateContainer>
             <p>Valid Thru</p>

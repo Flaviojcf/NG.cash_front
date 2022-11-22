@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { NewTransaction } from "../NewTransaction/NewTransaction";
 import {
@@ -44,7 +44,11 @@ export function Profile({ handleClick, selecteComponent }: ProfileProps) {
     selectedOption === "New transaction" &&
     selecteComponent === "Cards";
 
-  console.log(isCards);
+
+   
+
+
+
 
   return (
     <ContainerProfile>

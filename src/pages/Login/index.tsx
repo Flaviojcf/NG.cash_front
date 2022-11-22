@@ -29,7 +29,7 @@ export function Login() {
   const { onSubmitLogin, isAuthenticated } = useAuthContext();
   const [isShowPassowrd, SetIsShowPassword] = useState(false);
 
-  console.log(isAuthenticated);
+
 
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ export function Login() {
       return;
     }
     try {
-      await onSubmitLogin(data.username, data.password);
+      await onSubmitLogin(data.username.toUpperCase(), data.password);
     } catch (err: any) {
       toast.error("Usuário ou senha incorretos.", {
         position: "top-center",
