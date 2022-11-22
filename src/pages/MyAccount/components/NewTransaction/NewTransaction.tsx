@@ -35,22 +35,30 @@ export function NewTransaction() {
       });
       return;
     }
-    await api.post("/createTransaction", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      creditedAccountUser: data.username.toUpperCase(),
-      value: Number(data.value),
-    });
-    toast.success("Transação concluída!", {
-      position: "top-center",
-      autoClose: 1000,
-      theme: "dark",
-    });
-    reset();
-    setTimeout(() => {
-      location.reload();
-    }, 1100);
+    try {
+      await api.post("/createTransaction", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        creditedAccountUser: data.username.toUpperCase(),
+        value: Number(data.value),
+      });
+      toast.success("Transação concluída!", {
+        position: "top-center",
+        autoClose: 1000,
+        theme: "dark",
+      });
+      reset();
+      setTimeout(() => {
+        location.reload();
+      }, 1100);
+    } catch (err) {
+      toast.error("Dinheiro insuficiente", {
+        position: "top-center",
+        autoClose: 1000,
+        theme: "dark",
+      });
+    }
   }
 
   const { handleSubmit, reset, register } = newTransactionForm;
