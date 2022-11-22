@@ -9,30 +9,32 @@ interface AuthContextProviderProps {
 
 interface AuthContextProps {
   onSubmitLogin: (username: string, password: string) => Promise<any>;
-  onLogout: ()=>void;
+  onLogout: () => void;
   isAuthenticated: boolean;
-  balance: number;
   username: string;
+  idUser: string;
+  balance: number;
 }
 
 export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [idUser, setIdUser] = useState("");
   const [balance, setBalance] = useState(0);
   const [username, setUsername] = useState(" ");
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const balance = localStorage.getItem("balance");
     const name = localStorage.getItem("name");
+    const id = localStorage.getItem("id");
 
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
       setIsAuthenticated(true);
-      setBalance(Number(balance));
       setUsername(String(name));
+      setIdUser(String(id));
     }
   });
 
@@ -47,16 +49,14 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       });
 
       const token = response.data.token;
-      const balance = response.data.account.balance;
       const name = response.data.username;
-      console.log(name)
+      const id = response.data.account.id;
 
       localStorage.setItem("token", JSON.stringify(token));
-      localStorage.setItem("balance", JSON.stringify(balance));
-      localStorage.setItem("name", (name));
+      localStorage.setItem("name", name);
+      localStorage.setItem("id", id);
 
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      api.defaults.headers.common["Authorization"] = `Bearer ${balance}`;
       api.defaults.headers.common["Authorization"] = `Bearer ${name}`;
 
       setIsAuthenticated(true);
@@ -70,13 +70,28 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
   }
 
-  function onLogout(){
-    localStorage.clear()
+  function onLogout() {
+    localStorage.clear();
   }
+
+  useEffect(() => {
+    async function getUserBalance() {
+      const response = await api.get("/getUserBalance");
+      setBalance(response.data);
+    }
+    getUserBalance();
+  }, []);
 
   return (
     <AuthContext.Provider
-      value={{ onSubmitLogin, isAuthenticated, balance, username, onLogout }}
+      value={{
+        onSubmitLogin,
+        isAuthenticated,
+        username,
+        onLogout,
+        idUser,
+        balance,
+      }}
     >
       {children}
     </AuthContext.Provider>

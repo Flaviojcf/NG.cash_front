@@ -60,7 +60,7 @@ export function Register() {
         headers: {
           "Content-Type": "application/json",
         },
-        username: data.username,
+        username: data.username.toUpperCase(),
         password: data.password,
       });
       toast.success("Conta cadastrada!", {

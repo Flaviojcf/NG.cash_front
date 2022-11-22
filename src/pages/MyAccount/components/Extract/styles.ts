@@ -68,3 +68,49 @@ export const NewTransactionContainer = styled.div`
     margin: 1rem 0rem;
   }
 `;
+
+export const FilterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 1rem;
+
+ 
+  > button {
+      height: 2.625rem;
+      max-width: 8rem;
+
+      border: 0;
+      background: #00875f;
+      font-weight: bold;
+      padding: 0 1.25rem;
+      margin-top: 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      color: ${(props) => props.theme.colors.white};
+
+      transition: all 0.2s;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+export const RadioContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  > input {
+    cursor: pointer;
+  }
+`;
