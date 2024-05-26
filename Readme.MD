@@ -17,7 +17,7 @@
   <p align="center">
     Este projeto é uma solução para o desafio do NG-Cash.
     <br />
-    <a href="https:/github.com/flaviojcf/NG.cash_front"><strong>Explore the code »</strong></a>
+    <a href="https://github.com/Flaviojcf/NG.cash_front"><strong>Explore the code »</strong></a>
     <br />
     <br />
     <a href="https://ng-cash-front.vercel.app/">View Demo</a>
