@@ -9,7 +9,7 @@
 
 <br />
 <div align="center">
-  <a href="https:/github.com/flaviojcf/NG.cash_front">
+  <a href="https://github.com/Flaviojcf/NG.cash_front">
     <img src="/public/ng-cash.png" alt="Logo">
   </a>
 
