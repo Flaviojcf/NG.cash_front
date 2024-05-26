@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https:/github.com/flaviojcf/NG.cash_front">
-    <img src="/public/lets-code.gif" alt="Logo">
+    <img src="/public/ng-cash.png" alt="Logo">
   </a>
 
 
